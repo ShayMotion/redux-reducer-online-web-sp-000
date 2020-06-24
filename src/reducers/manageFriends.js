@@ -1,21 +1,19 @@
-export function manageFriends(state, action){
-  switch(action.type){
-    case "ADD_FRIEND":
-      return (
-        {...state,
-          friends: [...state.friends, {
-            name: action.friend.name,
-            hometown: action.friend.hometown,
-            id: action.friend.id
-        }]
-      })
-    case "REMOVE_FRIEND":
-      let newFriends = state.friends.filter(friend => friend.id !== action.id)
-      return (
-        {...state,
-          friends: newFriends
-      })
-    default:
-      return state
+export function manageFriends(state, action) {
+  var stateCpy = {friends:[]}
+  if(state.friends) {
+    state.friends.map( friend => {
+      stateCpy.friends.push( Object.assign({},friend) );
+    });
   }
-}	}
+
+  switch(action.type) {
+    case "ADD_FRIEND":
+      stateCpy.friends.push( Object.assign({},action.friend) );
+      return stateCpy;
+    case "REMOVE_FRIEND":
+      stateCpy.friends = stateCpy.friends.filter( friend => friend.id !== action.id );
+      return stateCpy;
+    default:
+      return stateCpy;
+  }
+}	
