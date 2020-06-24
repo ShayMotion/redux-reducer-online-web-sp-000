@@ -1,10 +1,10 @@
 export function managePresents(state, action){
-  switch(action.type){
+  switch(action.type) {
     case "INCREASE":
-      return {numberOfPresents: state.numberOfPresents + 1}
+      return Object.assign({}, state, {numberOfPresents: state.numberOfPresents+1});
     default:
-      return state
+      return Object.assign({},state);
   }
-}
+}	
 
 
